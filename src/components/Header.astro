@@ -1,0 +1,42 @@
+---
+import Nav from "./Nav.astro";
+---
+
+<header>
+  <div class="logo">
+    <a href="/#" class="nav_logo">
+      <img src="../logo_sm.svg" alt="UX Copenhagen" />
+    </a>
+  </div>
+  <Nav />
+  <div class="streg">
+    <hr />
+  </div>
+</header>
+
+<style>
+  header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .logo {
+    max-width: 80%;
+  }
+  @media screen and (min-width: 900px) {
+    .logo {
+      width: 50%;
+    }
+  }
+
+  hr {
+    border-color: var(--primary-color);
+    width: 80%;
+    margin-bottom: 2em;
+    margin-top: 2em;
+    border-radius: 10em;
+  }
+
+  .streg {
+    grid-column: 1/3;
+  }
+</style>

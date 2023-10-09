@@ -1,0 +1,52 @@
+---
+const { title } = Astro.props;
+---
+
+<button>{title}</button>
+
+<style>
+  button {
+    color: var(--secondary-text);
+    background-color: var(--primary-variant-color);
+    border-radius: var(--border-radius);
+    border: none;
+    padding: 0.5rem;
+    font-size: var(--sm-size);
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(18, 18, 18, 0.5);
+    white-space: nowrap;
+  }
+
+  button:hover {
+    background-color: var(--hover-color);
+    transition: 0.7s ease;
+    cursor: pointer;
+    animation-name: pulse;
+    animation-duration: 1.6s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: both, both;
+  }
+
+  @keyframes pulse {
+    0% {
+      scale: 1;
+    }
+
+    25% {
+      scale: 0.9;
+    }
+
+    50% {
+      scale: 0.8;
+    }
+
+    75% {
+      scale: 0.9;
+    }
+
+    100% {
+      scale: 1;
+    }
+  }
+</style>

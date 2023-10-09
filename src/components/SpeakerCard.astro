@@ -1,0 +1,56 @@
+---
+const { data } = Astro.props;
+import Button from "../components/Button.astro";
+---
+
+<article>
+  <img src={data.image} alt="Speaker Image" />
+  <h2>{data.name}</h2>
+  <h3>{data.position}</h3>
+  <div class="read_more">
+    <a href={`speaker/${data.slug}`}>
+      <Button title="Read More" />
+    </a>
+  </div>
+</article>
+
+<style>
+  article {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    background-image: url("../card_background.svg");
+    background-size: cover;
+    margin-bottom: 4em;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin: 1em;
+    box-sizing: border-box;
+  }
+
+  .read_more {
+    margin-left: 70%;
+  }
+  @media screen and (min-width: 1600px) {
+    article {
+      max-width: 25%;
+    }
+    .read_more {
+      padding-bottom: 4em;
+    }
+  }
+
+  img {
+    width: 80%;
+    height: auto;
+  }
+
+  h2 {
+    font-size: var(--lg-size);
+  }
+
+  h3 {
+    margin-top: -10px;
+    font-size: var(--md-size);
+  }
+</style>

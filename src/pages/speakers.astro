@@ -1,0 +1,72 @@
+---
+import "../styles/style.css";
+import MainLayout from "../layouts/MainLayout.astro";
+import SpeakerCard from "../components/SpeakerCard.astro";
+const data = await fetch(
+  "https://uxrpssobleoddjtiynvs.supabase.co/rest/v1/speakers",
+  {
+    method: "GET",
+    headers: {
+      apikey:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV4cnBzc29ibGVvZGRqdGl5bnZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTU4ODM2NDAsImV4cCI6MjAxMTQ1OTY0MH0.9OZTTto-yaauUUl5WmO_bN-Xa0lZOUwru6s7RDfRNLk",
+    },
+  }
+).then((res) => res.json());
+---
+
+<MainLayout title="Speakers">
+  <h1>Speakers</h1>
+  <section class="persons">
+    {
+      data.map((speaker) => {
+        return <SpeakerCard data={speaker} />;
+      })
+    }
+  </section>
+  <div id="scroll-to-top">
+    <img src="../arrow.svg" alt="arrow up" />
+  </div>
+</MainLayout>
+
+<style>
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 1em;
+  }
+  @media screen and (min-width: 2400px) {
+    section {
+      gap: 5em;
+    }
+  }
+  h1 {
+    text-indent: 10%;
+    padding-bottom: 0.5rem;
+    font-size: var(--xxlg-size);
+  }
+  #scroll-to-top {
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    width: 5%;
+  }
+
+  @media (max-width: 768px) {
+    #scroll-to-top {
+      width: 8%;
+    }
+  }
+
+  @media (min-width: 2200px) {
+    #scroll-to-top {
+      width: 4%;
+    }
+  }
+</style>
+
+<script src="../js/scroll.js"></script>

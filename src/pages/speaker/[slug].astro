@@ -1,0 +1,82 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Button from "../../components/Button.astro";
+export async function getStaticPaths() {
+  const data = await fetch(
+    "https://uxrpssobleoddjtiynvs.supabase.co/rest/v1/speakers",
+    {
+      method: "GET",
+      headers: {
+        apikey:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV4cnBzc29ibGVvZGRqdGl5bnZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTU4ODM2NDAsImV4cCI6MjAxMTQ1OTY0MH0.9OZTTto-yaauUUl5WmO_bN-Xa0lZOUwru6s7RDfRNLk",
+      },
+    }
+  ).then((response) => response.json());
+
+  return data.map((speaker) => {
+    return {
+      params: { slug: speaker.slug },
+      props: { myData: speaker },
+    };
+  });
+}
+const { myData } = Astro.props;
+---
+
+<MainLayout title={myData.name}>
+  <article>
+    <img src={myData.image} alt="Speaker Image" />
+    <div>
+      <h1>{myData.name}</h1>
+      <p>{myData.description}</p>
+      <br /><br /><br />
+      <a href="/speakers">
+        <div class="goback">
+          <Button class="goback" title="Go Back" />
+        </div>
+      </a>
+    </div>
+  </article>
+</MainLayout>
+
+<style>
+  img {
+    max-width: 70%;
+  }
+  h1 {
+    font-size: var(--xlg-size);
+  }
+  p {
+    max-width: 50ch;
+    font-size: var(--md-size);
+    line-height: 3ch;
+  }
+  article {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    background-image: url("../card_background.svg");
+    background-size: cover;
+    max-width: 80%;
+    margin: 0 auto;
+    margin-top: 3rem;
+    padding: 1rem;
+    border-radius: 1.5rem;
+  }
+  @media (max-width: 800px) {
+    article {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (min-width: 2600px) {
+    article {
+      border-radius: 2rem;
+      padding: 4rem;
+    }
+  }
+
+  .goback {
+    margin-bottom: 0em;
+    margin-left: 80%;
+  }
+</style>
